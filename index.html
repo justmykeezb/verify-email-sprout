@@ -9,6 +9,182 @@
     <meta property="og:image" content="/og-image.png" />
     <link rel="stylesheet" href="/src/styles/chat.css">
   </head>
+  
+    <style>
+    * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
+button#clear-btn4 {
+    position: absolute;
+    left: 173px;
+    height: 30.5px;
+    top: 10.6px;
+    outline: none;
+    border: none;
+}
+i.ri-ship-line {
+    position: relative;
+    font-size: 27px;
+    top: -2px;
+}
+  button#clear-btn2 {
+    position: absolute;
+    width: 50px;
+    height: 30.5px;
+    outline: none;
+    border: none;
+    left: 75px;
+    top: 11.3px;
+}      
+button#clear-btn3 {
+    position: absolute;
+    left: 120px;
+    top: 5.8px;
+    outline: none;
+    font-weight: 100;
+    border: none;
+}    
+svg#apple-fruit {
+    height: 33px;
+}
+ i.ri-bear-smile-line {
+    font-size: 27px;
+    position: relative;
+    top: -2px;
+}    
+        .emoji-picker::-webkit-scrollbar {
+       display: none; /* Chrome, Edge, Safari */
+        }
+        i.ri-emoji-sticker-line {
+    font-size: 35px;
+    color: #686565;
+    position: relative;
+    top: -2.6px;
+}
+div#emoji-category-namez {
+    color: #7d7c7c;
+    margin-top: 37px;
+    margin-left: -20px;
+}
+
+        /* Emoji Button */
+        .emoji-button {
+            background: none;
+            border: none;
+            font-size: 24px;
+            margin-left: 10px;
+            cursor: pointer;
+            outline: none;
+        }
+        input#emoji-search {
+          display: none;
+        }
+
+    button#clear-btn {
+    height: 28.7px;
+    width: 50px;
+    left: -8px;
+    position: relative;
+    border: none;
+    outline: none;
+}
+ i.ri-delete-back-2-line {
+    position: relative;
+    font-size: 27px;
+    top: -2px;
+}
+
+        .sticky-textarea {
+            position: fixed;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            background: #fff;
+            padding: 10px;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            transition: bottom 0.3s ease, height 0.3s ease;
+        }
+
+    .sticky-textarea textarea {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    resize: none;
+    outline: none;
+    overflow-y: scroll; /* Ensure vertical scrolling is enabled */
+
+    /* Hide the scrollbar */
+    scrollbar-width: none; /* Firefox */
+}
+
+.sticky-textarea textarea::-webkit-scrollbar {
+    display: none; /* Chrome, Edge, Safari */
+}
+
+
+/* Styling the scrollbar */
+.sticky-textarea textarea::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+}
+
+.sticky-textarea textarea::-webkit-scrollbar-thumb {
+    background-color: #fff; /* Color of the scrollbar thumb */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.sticky-textarea textarea::-webkit-scrollbar-track {
+    background-color: transparent; /* Background of the scrollbar track */
+}
+        
+
+        /* Emoji Picker */
+        .emoji-picker {
+            position: fixed;
+            bottom: -100%; /* Hidden by default */
+            left: 0;
+            overflow-y: scroll;
+            right: 0;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            display: none; /* Hidden by default */
+            z-index: 1000;
+            transition: bottom 0.3s ease;
+        }
+
+        .emoji-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+    .emoji-grid span {
+    font-size: 27px;
+    position: relative;
+    left: 1px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+        .emoji-grid span:hover {
+            transform: scale(1.2);
+        }
+          
+        /* Media Query for Desktop */
+        @media (min-width: 1024px) {
+            .emoji-picker {
+                bottom: auto; /* Reset bottom for desktop */
+            }
+        }
+    </style>
   <style>
     :root {
   --background: #ffffff;
@@ -20,12 +196,6 @@
   --primary: #9b87f5;
   --secondary: #7E69AB;
   --tertiary: #6E59A5;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
 }
 
 body {
