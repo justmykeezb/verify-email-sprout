@@ -146,7 +146,7 @@ function initializeEventListeners() {
 
   // Send button handler
   document.getElementById('sendButton')?.addEventListener('click', () => {
-    const messageInput = document.getElementById('messageInput') as HTMLTextAreaElement;
+    const messageInput = document.getElementById('messageInput');
     const message = messageInput.value.trim();
     if (message) {
       console.log('Sending message:', message);
