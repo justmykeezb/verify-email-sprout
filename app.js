@@ -136,6 +136,24 @@ function initializeEventListeners() {
     const chatView = document.getElementById('chatView');
     chatView.classList.remove('active');
   });
+
+  // Auto-resize textarea
+  const messageInput = document.getElementById('messageInput');
+  messageInput?.addEventListener('input', function() {
+    this.style.height = 'auto';
+    this.style.height = Math.min(this.scrollHeight, 160) + 'px';
+  });
+
+  // Send button handler
+  document.getElementById('sendButton')?.addEventListener('click', () => {
+    const messageInput = document.getElementById('messageInput') as HTMLTextAreaElement;
+    const message = messageInput.value.trim();
+    if (message) {
+      console.log('Sending message:', message);
+      messageInput.value = '';
+      messageInput.style.height = 'auto';
+    }
+  });
 }
 
 // Initialize the application

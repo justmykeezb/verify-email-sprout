@@ -241,6 +241,52 @@
       z-index: 1;
     }
 
+    .message-input-container {
+      display: flex;
+      gap: 0.5rem;
+      padding: 1rem;
+      background: white;
+      border-top: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
+
+    .message-input {
+      flex: 1;
+      resize: none;
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      min-height: 2.5rem;
+      max-height: 10rem;
+      overflow-y: auto;
+    }
+
+    .message-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      ring: 2px var(--primary);
+    }
+
+    .send-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .send-button:hover {
+      background: var(--secondary);
+    }
+
     .hidden {
       display: none !important;
     }
@@ -323,6 +369,17 @@
           </div>
           <div class="chat-messages" id="chatMessages">
             <!-- Messages will be inserted here -->
+          </div>
+          <div class="message-input-container">
+            <textarea 
+              class="message-input" 
+              placeholder="Type a message..." 
+              rows="1"
+              id="messageInput"
+            ></textarea>
+            <button class="send-button" id="sendButton">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
           </div>
         </div>
       </div>
