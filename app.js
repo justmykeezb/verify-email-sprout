@@ -52,6 +52,44 @@ const gradients = [
   "linear-gradient(135deg, #6E59A5 0%, #E5DEFF 100%)",
 ];
 
+function isMobileDevice() {
+  const userAgent = navigator.userAgent.toLowerCase();
+  const mobileKeywords = ['mobile', 'android', 'iphone', 'ipod', 'ipad', 'windows phone'];
+  return mobileKeywords.some(keyword => userAgent.includes(keyword));
+}
+
+function isDesktopMode() {
+  return window.innerWidth >= 768 && !isMobileDevice();
+}
+
+function handleResponsiveLayout() {
+  const chatView = document.getElementById('chatView');
+  const stickyTextarea = document.querySelector('.sticky-textarea');
+  
+  if (isDesktopMode()) {
+    // Desktop layout
+    if (stickyTextarea) {
+      stickyTextarea.style.left = '380px';
+      stickyTextarea.style.width = 'auto';
+      stickyTextarea.style.zIndex = '2';
+    }
+    if (chatView) {
+      chatView.style.position = 'relative';
+      chatView.style.transform = 'none';
+    }
+  } else {
+    // Mobile layout
+    if (stickyTextarea) {
+      stickyTextarea.style.left = '0';
+      stickyTextarea.style.width = '100%';
+      stickyTextarea.style.zIndex = '51';
+    }
+    if (chatView && !chatView.classList.contains('active')) {
+      chatView.style.transform = 'translateX(100%)';
+    }
+  }
+}
+
 function getGradientBackground(index) {
   return gradients[index % gradients.length];
 }
@@ -154,10 +192,14 @@ function initializeEventListeners() {
       messageInput.style.height = 'auto';
     }
   });
+
+  // Add resize event listener for responsive layout
+  window.addEventListener('resize', handleResponsiveLayout);
 }
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', () => {
   renderChatList();
   initializeEventListeners();
+  handleResponsiveLayout(); // Initial layout check
 });
