@@ -53,6 +53,7 @@ const gradients = [
 ];
 
 function isMobileDevice() {
+  // Check for mobile device regardless of viewport width
   const userAgent = navigator.userAgent.toLowerCase();
   const mobileKeywords = ['mobile', 'android', 'iphone', 'ipod', 'ipad', 'windows phone'];
   return mobileKeywords.some(keyword => userAgent.includes(keyword));
@@ -65,9 +66,20 @@ function isDesktopMode() {
 function handleResponsiveLayout() {
   const chatView = document.getElementById('chatView');
   const stickyTextarea = document.querySelector('.sticky-textarea');
+  const isMobile = isMobileDevice();
   
-  if (isDesktopMode()) {
-    // Desktop layout
+  if (isMobile) {
+    // Always use mobile layout for mobile devices
+    if (stickyTextarea) {
+      stickyTextarea.style.left = '0';
+      stickyTextarea.style.width = '100%';
+      stickyTextarea.style.zIndex = '51';
+    }
+    if (chatView && !chatView.classList.contains('active')) {
+      chatView.style.transform = 'translateX(100%)';
+    }
+  } else {
+    // Desktop layout for non-mobile devices
     if (stickyTextarea) {
       stickyTextarea.style.left = '380px';
       stickyTextarea.style.width = 'auto';
@@ -76,16 +88,6 @@ function handleResponsiveLayout() {
     if (chatView) {
       chatView.style.position = 'relative';
       chatView.style.transform = 'none';
-    }
-  } else {
-    // Mobile layout
-    if (stickyTextarea) {
-      stickyTextarea.style.left = '0';
-      stickyTextarea.style.width = '100%';
-      stickyTextarea.style.zIndex = '51';
-    }
-    if (chatView && !chatView.classList.contains('active')) {
-      chatView.style.transform = 'translateX(100%)';
     }
   }
 }
