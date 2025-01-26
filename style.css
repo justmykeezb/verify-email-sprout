@@ -138,8 +138,9 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
-  background: url('/lovable-uploads/fe4a762c-9b85-4cd4-a0af-b895843d44ab.png');
+  background-image: url('Screenshot_20250126-232629.jpg');
   background-size: cover;
+  background-repeat: no-repeat;
   background-position: center;
 }
 
