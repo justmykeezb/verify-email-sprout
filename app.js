@@ -66,28 +66,46 @@ function isDesktopMode() {
 function handleResponsiveLayout() {
   const chatView = document.getElementById('chatView');
   const stickyTextarea = document.querySelector('.sticky-textarea');
+  const chatList = document.getElementById('chatList');
   const isMobile = isMobileDevice();
   
   if (isMobile) {
     // Always use mobile layout for mobile devices
+    if (chatView) {
+      chatView.style.position = 'fixed';
+      chatView.style.top = '0';
+      chatView.style.left = '0';
+      chatView.style.width = '100%';
+      chatView.style.height = '100%';
+      if (!chatView.classList.contains('active')) {
+        chatView.style.transform = 'translateX(100%)';
+      }
+    }
     if (stickyTextarea) {
       stickyTextarea.style.left = '0';
       stickyTextarea.style.width = '100%';
       stickyTextarea.style.zIndex = '51';
     }
-    if (chatView && !chatView.classList.contains('active')) {
-      chatView.style.transform = 'translateX(100%)';
+    if (chatList) {
+      chatList.style.width = '100%';
     }
   } else {
     // Desktop layout for non-mobile devices
+    if (chatView) {
+      chatView.style.position = 'relative';
+      chatView.style.top = 'auto';
+      chatView.style.left = 'auto';
+      chatView.style.width = 'auto';
+      chatView.style.height = 'auto';
+      chatView.style.transform = 'none';
+    }
     if (stickyTextarea) {
       stickyTextarea.style.left = '380px';
       stickyTextarea.style.width = 'auto';
       stickyTextarea.style.zIndex = '2';
     }
-    if (chatView) {
-      chatView.style.position = 'relative';
-      chatView.style.transform = 'none';
+    if (chatList) {
+      chatList.style.width = '380px';
     }
   }
 }
@@ -156,7 +174,7 @@ function updateChatView(userId) {
   });
 
   // Show chat view on mobile
-  if (window.innerWidth <= 768) {
+  if (isMobileDevice()) {
     chatView.classList.add('active');
   }
 }
