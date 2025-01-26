@@ -104,8 +104,8 @@ div#emoji-category-namez {
 
         .sticky-textarea {
             position: fixed;
-            bottom: -5px;
-            left: 0;
+            bottom: 0;
+            left: 380px; /* Width of the chat list */
             right: 0;
             display: flex;
             align-items: center;
@@ -113,6 +113,7 @@ div#emoji-category-namez {
             padding: 10px;
             box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
             transition: bottom 0.3s ease, height 0.3s ease;
+            z-index: 2;
         }
 
     .sticky-textarea textarea {
