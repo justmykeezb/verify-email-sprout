@@ -151,12 +151,13 @@ div#emoji-category-namez {
         
 
         /* Emoji Picker */
+
         .emoji-picker {
             position: fixed;
             bottom: -100%; /* Hidden by default */
-            left: 0;
+            right: 0; /* Changed from left: 0 to right: 0 */
+            width: calc(100% - 380px); /* Set width to match chat view area */
             overflow-y: scroll;
-            right: 0;
             background: #fff;
             border: 1px solid #ccc;
             border-radius: 10px;
@@ -167,30 +168,14 @@ div#emoji-category-namez {
             transition: bottom 0.3s ease;
         }
 
-        .emoji-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-    .emoji-grid span {
-    font-size: 27px;
-    position: relative;
-    left: 1px;
-    cursor: pointer;
-    transition: transform 0.2s;
-}
-
-        .emoji-grid span:hover {
-            transform: scale(1.2);
-        }
-          
-        /* Media Query for Desktop */
-        @media (min-width: 1024px) {
+        /* Media Query for Mobile */
+        @media (max-width: 768px) {
             .emoji-picker {
-                bottom: auto; /* Reset bottom for desktop */
+                width: 100%; /* Full width on mobile */
+                right: 0;
             }
         }
+
     </style>
   <style>
     :root {
@@ -1824,3 +1809,4 @@ document.addEventListener('DOMContentLoaded', () => {
     </script>
   </body>
 </html>
+
