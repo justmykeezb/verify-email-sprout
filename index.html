@@ -154,7 +154,7 @@ div#emoji-category-namez {
         /* Emoji Picker */
         .emoji-picker {
             position: fixed;
-            bottom: -100%; /* Hidden by default */
+            bottom: -100%;
             right: 0;
             width: calc(100% - 380px);
             overflow-y: scroll;
@@ -162,25 +162,23 @@ div#emoji-category-namez {
             border: 1px solid #ccc;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            padding: 10px 0; /* Remove horizontal padding */
             display: none;
             z-index: 1000;
             transition: bottom 0.3s ease;
             display: grid;
             grid-template-columns: repeat(8, 1fr);
-            gap: 8px;
-            padding-left: 8px; /* Add consistent padding */
-            padding-right: 8px;
+            gap: 4px;
+            padding: 8px;
         }
 
         .emoji-picker span {
             font-size: 24px;
             cursor: pointer;
             text-align: center;
-            padding: 5px;
+            padding: 6px;
             border-radius: 5px;
             transition: background-color 0.2s;
-            width: 100%; /* Ensure spans take full width */
+            aspect-ratio: 1;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -200,12 +198,12 @@ div#emoji-category-namez {
                 border-radius: 10px 10px 0 0;
                 z-index: 1001;
                 grid-template-columns: repeat(6, 1fr);
-                gap: 10px;
-                padding: 15px 10px; /* Consistent padding on mobile */
+                gap: 4px;
+                padding: 8px;
             }
 
             .emoji-picker span {
-                font-size: 28px; /* Slightly larger on mobile */
+                font-size: 22px;
             }
 
             .sticky-textarea {
@@ -213,8 +211,10 @@ div#emoji-category-namez {
             }
 
             .emoji-button {
+                margin-right: auto;
                 margin-left: 0;
                 padding-left: 10px;
+                order: -1;
             }
         }
 
