@@ -1542,11 +1542,11 @@ body {
         // Toggle emoji picker visibility
         emojiToggle.addEventListener('click', (event) => {
             event.stopPropagation();
-            const isVisible = emojiPicker.style.bottom === '0px';
-            emojiPicker.style.bottom = isVisible ? '-100%' : '-39px';
+            const isVisible = emojiPicker.style.bottom === '-39px';
+            emojiPicker.style.bottom = isVisible ? '-100%' : '0px';
             emojiPicker.style.height = isVisible ? '0' : '312.7px';
             emojiPicker.style.display = isVisible ? 'none' : 'block';
-            textareaContainer.style.bottom = isVisible ? '-5px' : '236px';
+            textareaContainer.style.bottom = isVisible ? '-5px' : '270px';
         });
 
         // Maintain height when typing in emoji search box
