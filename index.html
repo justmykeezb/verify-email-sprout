@@ -151,7 +151,6 @@ div#emoji-category-namez {
         
 
         /* Emoji Picker */
-
         .emoji-picker {
             position: fixed;
             bottom: -100%; /* Hidden by default */
@@ -173,6 +172,14 @@ div#emoji-category-namez {
             .emoji-picker {
                 width: 100%; /* Full width on mobile */
                 right: 0;
+                left: 0; /* Ensure it spans full width */
+                bottom: 0; /* Position at bottom */
+                border-radius: 10px 10px 0 0; /* Rounded corners only at top */
+                z-index: 1001; /* Ensure it's above other mobile elements */
+            }
+
+            .sticky-textarea {
+                z-index: 1000; /* Ensure proper stacking with emoji picker */
             }
         }
 
@@ -1809,4 +1816,3 @@ document.addEventListener('DOMContentLoaded', () => {
     </script>
   </body>
 </html>
-
