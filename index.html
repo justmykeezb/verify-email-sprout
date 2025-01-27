@@ -1543,10 +1543,10 @@ body {
         emojiToggle.addEventListener('click', (event) => {
             event.stopPropagation();
             const isVisible = emojiPicker.style.bottom === '0px';
-            emojiPicker.style.bottom = isVisible ? '-100%' : '0px';
-            emojiPicker.style.height = isVisible ? '0' : '312.7px';
+            emojiPicker.style.bottom = isVisible ? '-100%' : '-39px';
+            emojiPicker.style.height = isVisible ? '0' : '278px';
             emojiPicker.style.display = isVisible ? 'none' : 'block';
-            textareaContainer.style.bottom = isVisible ? '-5px' : '312.7px';
+            textareaContainer.style.bottom = isVisible ? '-5px' : '278px';
         });
 
         // Maintain height when typing in emoji search box
