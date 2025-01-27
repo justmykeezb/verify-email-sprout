@@ -80,9 +80,10 @@ div#emoji-category-namez {
             background: none;
             border: none;
             font-size: 24px;
-            margin-left: 10px;
+            margin-right: auto; /* Move to left side */
             cursor: pointer;
             outline: none;
+            order: -1; /* Ensure it appears first in flex container */
         }
         input#emoji-search {
           display: none;
@@ -154,32 +155,60 @@ div#emoji-category-namez {
         .emoji-picker {
             position: fixed;
             bottom: -100%; /* Hidden by default */
-            right: 0; /* Changed from left: 0 to right: 0 */
-            width: calc(100% - 380px); /* Set width to match chat view area */
+            right: 0;
+            width: calc(100% - 380px);
             overflow-y: scroll;
             background: #fff;
             border: 1px solid #ccc;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             padding: 10px;
-            display: none; /* Hidden by default */
+            display: none;
             z-index: 1000;
             transition: bottom 0.3s ease;
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 8px;
+        }
+
+        .emoji-picker span {
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            padding: 5px;
+            border-radius: 5px;
+            transition: background-color 0.2s;
+        }
+
+        .emoji-picker span:hover {
+            background-color: #f0f0f0;
         }
 
         /* Media Query for Mobile */
         @media (max-width: 768px) {
             .emoji-picker {
-                width: 100%; /* Full width on mobile */
+                width: 100%;
                 right: 0;
-                left: 0; /* Ensure it spans full width */
-                bottom: 0; /* Position at bottom */
-                border-radius: 10px 10px 0 0; /* Rounded corners only at top */
-                z-index: 1001; /* Ensure it's above other mobile elements */
+                left: 0;
+                bottom: 0;
+                border-radius: 10px 10px 0 0;
+                z-index: 1001;
+                grid-template-columns: repeat(6, 1fr); /* Adjust grid for mobile */
+                gap: 10px;
+                padding: 15px;
+            }
+
+            .emoji-picker span {
+                font-size: 28px; /* Slightly larger on mobile */
             }
 
             .sticky-textarea {
-                z-index: 1000; /* Ensure proper stacking with emoji picker */
+                z-index: 1000;
+            }
+
+            .emoji-button {
+                margin-left: 0;
+                padding-left: 10px;
             }
         }
 
