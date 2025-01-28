@@ -639,6 +639,9 @@ span.sfh_\$ {
             <button class="camera-button" style="margin-left: auto; background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px;">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
             </button>
+            <button id="voice-to-text" class="voice-button" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px; margin-right: 10px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+            </button>
             <button id="emoji-toggle-right" class="emoji-button"><i class="ri-emoji-sticker-line"></i></button>
           </div>
 
@@ -1721,9 +1724,57 @@ span.sfh_\$ {
     });
 </script>
 
-        </div>
-      </div>
-    </div>
+<script>
+// Add voice-to-text functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const voiceButton = document.getElementById('voice-to-text');
+    const textarea = document.getElementById('emoji-textarea');
+    let recognition = null;
+
+    // Check if browser supports speech recognition
+    if ('webkitSpeechRecognition' in window) {
+        recognition = new webkitSpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+
+        // Configure recognition to auto-detect language
+        recognition.lang = 'auto';
+
+        recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+            // Append the transcribed text to the textarea
+            textarea.value += transcript;
+        };
+
+        recognition.onerror = (event) => {
+            console.error('Speech recognition error:', event.error);
+            voiceButton.style.color = '#000'; // Reset color when error occurs
+        };
+
+        recognition.onend = () => {
+            voiceButton.style.color = '#000'; // Reset color when recording ends
+        };
+
+        let isRecording = false;
+
+        voiceButton.addEventListener('click', () => {
+            if (!isRecording) {
+                recognition.start();
+                voiceButton.style.color = '#ff0000'; // Red color when recording
+                isRecording = true;
+            } else {
+                recognition.stop();
+                voiceButton.style.color = '#000';
+                isRecording = false;
+            }
+        });
+    } else {
+        voiceButton.style.display = 'none';
+        console.warn('Speech recognition not supported in this browser');
+    }
+});
+</script>
+
     <script>
       const messages = [
   {
