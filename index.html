@@ -632,10 +632,14 @@ span.sfh_\$ {
           <div class="chat-messages" id="chatMessages">
             <!-- Messages will be inserted here -->
           </div>
+
           <div class="sticky-textarea" id="textarea-container">
             <textarea id="emoji-textarea" rows="1" placeholder="Type a message..."></textarea>
             <button id="emoji-toggle" class="emoji-button"><i class="ri-emoji-sticker-line"></i></button>
-            <button id="emoji-toggle-right" class="emoji-button" style="margin-left: auto;"><i class="ri-emoji-sticker-line"></i></button>
+            <button class="camera-button" style="margin-left: auto; background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px;">
+              <i class="ri-camera-line"></i>
+            </button>
+            <button id="emoji-toggle-right" class="emoji-button"><i class="ri-emoji-sticker-line"></i></button>
           </div>
 
 <div id="emoji-picker" class="emoji-picker" style="border: 1px solid #fff; border-radius: 1px;">
@@ -1887,3 +1891,4 @@ document.addEventListener('DOMContentLoaded', () => {
     </script>
   </body>
 </html>
+
