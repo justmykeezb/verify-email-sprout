@@ -1736,12 +1736,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Check if browser supports speech recognition
     if ('webkitSpeechRecognition' in window) {
         recognition = new webkitSpeechRecognition();
-        recognition.continuous = false; // Changed to false to prevent duplicates
-        recognition.interimResults = false; // Changed to false to get only final results
+        recognition.continuous = false;
+        recognition.interimResults = false;
         recognition.maxAlternatives = 1;
-
-        // Configure recognition to auto-detect language
         recognition.lang = 'auto';
+
+        // Set a timeout of 24 hours (86400000 milliseconds)
+        let recordingTimeout;
 
         recognition.onresult = (event) => {
             const finalTranscript = event.results[0][0].transcript;
@@ -1751,10 +1752,12 @@ document.addEventListener('DOMContentLoaded', () => {
         recognition.onerror = (event) => {
             console.error('Speech recognition error:', event.error);
             voiceButton.style.color = '#000';
+            clearTimeout(recordingTimeout);
         };
 
         recognition.onend = () => {
             voiceButton.style.color = '#000';
+            clearTimeout(recordingTimeout);
         };
 
         let isRecording = false;
@@ -1764,10 +1767,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 recognition.start();
                 voiceButton.style.color = '#ff0000'; // Red color when recording
                 isRecording = true;
+                
+                // Set timeout for 24 hours
+                recordingTimeout = setTimeout(() => {
+                    recognition.stop();
+                    isRecording = false;
+                    voiceButton.style.color = '#000';
+                }, 86400000); // 24 hours in milliseconds
             } else {
                 recognition.stop();
                 voiceButton.style.color = '#000';
                 isRecording = false;
+                clearTimeout(recordingTimeout);
             }
         });
     } else {
