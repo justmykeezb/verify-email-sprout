@@ -1736,38 +1736,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // Check if browser supports speech recognition
     if ('webkitSpeechRecognition' in window) {
         recognition = new webkitSpeechRecognition();
-        recognition.continuous = true; // Enable continuous recording
-        recognition.interimResults = true; // Enable interim results
+        recognition.continuous = false; // Changed to false to prevent duplicates
+        recognition.interimResults = false; // Changed to false to get only final results
         recognition.maxAlternatives = 1;
 
         // Configure recognition to auto-detect language
         recognition.lang = 'auto';
 
-        // Set a timeout of 20 minutes (1200000 milliseconds)
-        let recordingTimeout;
-
         recognition.onresult = (event) => {
-            let finalTranscript = '';
-            for (let i = event.resultIndex; i < event.results.length; i++) {
-                const transcript = event.results[i][0].transcript;
-                if (event.results[i].isFinal) {
-                    finalTranscript += transcript;
-                }
-            }
-            if (finalTranscript) {
-                textarea.value += finalTranscript;
-            }
+            const finalTranscript = event.results[0][0].transcript;
+            textarea.value += finalTranscript + ' ';
         };
 
         recognition.onerror = (event) => {
             console.error('Speech recognition error:', event.error);
             voiceButton.style.color = '#000';
-            clearTimeout(recordingTimeout);
         };
 
         recognition.onend = () => {
             voiceButton.style.color = '#000';
-            clearTimeout(recordingTimeout);
         };
 
         let isRecording = false;
@@ -1777,18 +1764,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 recognition.start();
                 voiceButton.style.color = '#ff0000'; // Red color when recording
                 isRecording = true;
-                
-                // Set timeout for 20 minutes
-                recordingTimeout = setTimeout(() => {
-                    recognition.stop();
-                    isRecording = false;
-                    voiceButton.style.color = '#000';
-                }, 1200000); // 20 minutes in milliseconds
             } else {
                 recognition.stop();
                 voiceButton.style.color = '#000';
                 isRecording = false;
-                clearTimeout(recordingTimeout);
             }
         });
     } else {
